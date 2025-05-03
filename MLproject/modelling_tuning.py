@@ -20,10 +20,10 @@ from amazon_preprocessing import load_and_preprocess_data
 # os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
 # os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000") # using local MLflow server
+#mlflow.set_tracking_uri("http://127.0.0.1:5000") # using local MLflow server
 mlflow.set_experiment("Amazon Sentiment Analysis Model")
 
-file_path = "amazon_reviews.csv"
+file_path = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "amazon_reviews.csv")
 data = load_and_preprocess_data(file_path)
 
 X = data['content']
