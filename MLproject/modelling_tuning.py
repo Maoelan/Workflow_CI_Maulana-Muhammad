@@ -15,12 +15,12 @@ from amazon_preprocessing import load_and_preprocess_data
 
 dagshub.init(repo_owner='Maoelan', repo_name='amazon-sentiment-analysis', mlflow=True)
 
-mlflow.set_tracking_uri("https://dagshub.com/Maoelan/amazon-sentiment-analysis.mlflow") # use dagshub
+# mlflow.set_tracking_uri("https://dagshub.com/Maoelan/amazon-sentiment-analysis.mlflow") # use dagshub
 
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
+# os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
+# os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
 
-# mlflow.set_tracking_uri("http://127.0.0.1:5000") # using local MLflow server
+mlflow.set_tracking_uri("http://127.0.0.1:5000") # using local MLflow server
 mlflow.set_experiment("Amazon Sentiment Analysis Model")
 
 file_path = "amazon_reviews.csv"
