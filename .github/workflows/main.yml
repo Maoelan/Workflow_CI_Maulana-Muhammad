@@ -40,11 +40,11 @@ jobs:
       
       - name: Download NLTK data
         run: |
-          conda run -n mlflow-env python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+          python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
           
       - name: Clean mlruns directory
         run: |
-          conda run -n mlflow-env rm -rf mlruns/
+          rm -rf mlruns/
           
       - name: Run mlflow project
         run: |
