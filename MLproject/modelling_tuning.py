@@ -13,7 +13,7 @@ from sklearn.metrics import classification_report, accuracy_score, roc_auc_score
 from xgboost import XGBClassifier
 from amazon_preprocessing import load_and_preprocess_data
 
-dagshub.init(repo_owner='Maoelan', repo_name='amazon-sentiment-analysis', mlflow=True)
+# dagshub.init(repo_owner='Maoelan', repo_name='amazon-sentiment-analysis', mlflow=True)
 
 # mlflow.set_tracking_uri("https://dagshub.com/Maoelan/amazon-sentiment-analysis.mlflow") # use dagshub
 
