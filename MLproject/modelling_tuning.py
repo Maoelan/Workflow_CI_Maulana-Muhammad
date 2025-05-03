@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import classification_report, accuracy_score, roc_auc_score, log_loss, confusion_matrix
 from xgboost import XGBClassifier
-from preprocessing.amazon_preprocessing import load_and_preprocess_data
+from amazon_preprocessing import load_and_preprocess_data
 
 dagshub.init(repo_owner='Maoelan', repo_name='amazon-sentiment-analysis', mlflow=True)
 
