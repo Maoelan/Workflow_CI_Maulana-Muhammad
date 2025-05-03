@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  push:
+  pull_request:
     branches:
       - main
 
@@ -33,7 +33,7 @@ jobs:
           
       - name: Download NLTK data
         run: |
-          python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
+          conda run -n mlflow-env python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
 
       - name: Check Env
         run: |
@@ -41,11 +41,11 @@ jobs:
 
       - name: Clean mlruns directory
         run: |
-          rm -rf mlruns/
+          conda run -n mlflow-env rm -rf mlruns/
           
       - name: Run mlflow project
         run: |
-          mlflow run MLproject --env-manager=local
+          conda run -n mlflow-env mlflow run MLproject --env-manager=local
           
       - name: Set up Git LFS
         run: |
