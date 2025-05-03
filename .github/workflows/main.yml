@@ -40,10 +40,6 @@ jobs:
         run: |
           python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
           
-      - name: Clean mlruns directory
-        run: |
-          rm -rf mlruns/
-          
       - name: Run mlflow project
         run: |
           mlflow run MLproject --env-manager=local
@@ -65,4 +61,3 @@ jobs:
           git add -f mlruns/
           git commit -m "Save mlruns from CI run" || true
           git push origin main
-          
