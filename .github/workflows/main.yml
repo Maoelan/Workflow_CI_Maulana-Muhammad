@@ -33,7 +33,8 @@ jobs:
           
       - name: Download NLTK data
         run: |
-          python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
+          conda run -n mlflow-env python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+
 
       - name: Check Env
         run: |
