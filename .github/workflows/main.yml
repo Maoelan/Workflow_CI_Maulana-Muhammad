@@ -1,0 +1,66 @@
+name: Amazon Sentiment Analysis CI
+
+on:
+  push:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+env: 
+  CSV_URL: "MLproject/amazon_preprocessing.py"
+
+permissions:
+  contents: write
+  actions: read 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: 3.12.7
+          environment-file: MLproject/conda.yaml
+          activate-environment: mlflow-env
+          auto-activate-base: false
+          
+      - name: Download NLTK data
+        run: |
+          python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
+
+      - name: Check Env
+        run: |
+          echo $CSV_URL
+
+      - name: Clean mlruns directory
+        run: |
+          rm -rf mlruns/
+          
+      - name: Run mlflow project
+        run: |
+          mlflow run MLproject --env-manager=local
+          
+      - name: Set up Git LFS
+        run: |
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git lfs install
+          git lfs track "mlruns/**"
+          git add .gitattributes
+          git commit -m "Track large files in mlruns with Git LFS" || true
+          git push origin main
+          
+      - name: Save mlruns to repo
+        run: |
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git add -f mlruns/
+          git commit -m "Save mlruns from CI run" || true
+          git push origin main
