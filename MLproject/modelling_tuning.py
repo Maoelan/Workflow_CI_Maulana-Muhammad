@@ -127,7 +127,7 @@ with mlflow.start_run():
 
     mlflow.sklearn.log_model(
         sk_model=best_model_for_current,
-        artifact_path="best_model",
+        artifact_path="model",
         input_example=input_example,
         signature=None
     )
