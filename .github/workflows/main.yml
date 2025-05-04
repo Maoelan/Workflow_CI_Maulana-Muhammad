@@ -40,6 +40,10 @@ jobs:
         run: |
           python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
           
+      - name: Clean mlruns directory
+        run: |
+          rm -rf mlruns/
+          
       - name: Run mlflow project
         run: |
           mlflow run MLproject --env-manager=local
@@ -67,7 +71,7 @@ jobs:
           GDRIVE_CREDENTIALS: ${{ secrets.GDRIVE_CREDENTIALS }}
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
         run: |
-            python MLproject/upload_to_gdrive.py
+          python MLproject/upload_to_gdrive.py
       
       - name: Get latest MLflow run_id
         run: |
@@ -87,7 +91,7 @@ jobs:
       
       - name: Tag Docker Image
         run: |
-          docker tag credit-scoring ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-sentiment-analysis:latest
+          docker tag amazon-sentiment-analysis ${{ secrets.DOCKER_HUB_USERNAME }}/amazon-sentiment-analysis:latest
       
       - name: Push Docker Image
         run: |
